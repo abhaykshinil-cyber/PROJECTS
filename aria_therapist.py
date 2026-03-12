@@ -1,3 +1,31 @@
+"""
+# Aria - AI Therapist
+
+Aria is a compassionate AI therapist chatbot powered by Ollama and LLaMA 3.2,
+designed to provide emotional support and a safe space for users to express their feelings.
+
+## Features
+- Empathetic, non-judgmental responses
+- Active listening with thoughtful follow-up questions
+- Suggests healthy coping strategies
+- Warm and conversational tone
+- Reminds users to seek professional help when needed
+
+## Requirements
+- Python 3.8+
+- Ollama installed and running (https://ollama.com)
+- LLaMA 3.2 model: run `ollama pull llama3.2`
+- Install dependency: `pip install ollama`
+
+## Usage
+    python aria_therapist.py
+
+## Disclaimer
+Aria is an AI and is NOT a substitute for professional mental health care.
+If you are experiencing a mental health crisis, please contact a licensed
+therapist or call a crisis helpline.
+"""
+
 import ollama
 
 SYSTEM_PROMPT = """You are a compassionate and professional AI therapist named Aria.
