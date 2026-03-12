@@ -1,30 +1,43 @@
-import anthropic
+import ollama
 
-client = anthropic.Anthropic()
-messages = []
+SYSTEM_PROMPT = """You are a compassionate and professional AI therapist named Aria.
+Your role is to:
+- Listen actively and empathetically to the user's feelings and concerns
+- Ask thoughtful follow-up questions to help them explore their emotions
+- Offer supportive, non-judgmental responses
+- Suggest healthy coping strategies when appropriate
+- Remind users to seek professional help for serious mental health concerns
+- Never diagnose or prescribe medication
+- Keep responses concise, warm, and conversational
 
-print("Claude Chatbot (type 'quit' to exit)\n")
+Always prioritize the user's emotional safety and well-being."""
+
+messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+
+print("Aria - AI Therapist (type 'quit' to exit)")
+print("I'm here to listen. How are you feeling today?\n")
 
 while True:
     user_input = input("You: ").strip()
     if not user_input:
         continue
     if user_input.lower() in ("quit", "exit"):
-        print("Goodbye!")
+        print("Aria: Take care of yourself. Remember, it's okay to reach out for help anytime. Goodbye!")
         break
 
     messages.append({"role": "user", "content": user_input})
 
-    print("Claude: ", end="", flush=True)
-    with client.messages.stream(
-        model="claude-opus-4-6",
-        max_tokens=1024,
+    print("Aria: ", end="", flush=True)
+    response_text = ""
+    stream = ollama.chat(
+        model="llama3.2",
         messages=messages,
-    ) as stream:
-        response_text = ""
-        for text in stream.text_stream:
-            print(text, end="", flush=True)
-            response_text += text
+        stream=True,
+    )
+    for chunk in stream:
+        text = chunk["message"]["content"]
+        print(text, end="", flush=True)
+        response_text += text
 
     print()
     messages.append({"role": "assistant", "content": response_text})
