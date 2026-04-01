@@ -1,0 +1,8 @@
+# Core browser automation
+playwright>=1.40.0
+
+# Local LLM inference via Ollama
+ollama>=0.1.7
+
+# Environment variable loading
+python-dotenv>=1.0.0
